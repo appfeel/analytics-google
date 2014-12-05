@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="com.analytics.google" version="1.0.8">
+  <engines>
+    <engine name="cordova" version=">=3.0.0" />
+  </engines>
+  <name>Google Analytics Plugin</name>
+  <description>Google Analytics Phonegap, Cordova, Intel XDK plugin for iOS/Android</description>
+  <author email="info@appfeel.com" href="https://github.com/appfeel/admob-google-cordova">AppFeel</author>
+  <license>MIT</license>
+  <keywords>analytics,google,metrics,event,screen,ua,universal analytics,universal,referral,download,install</keywords>
+  <repo>https://github.com/appfeel/analytics-google.git</repo>
+  <issue>https://github.com/appfeel/analytics-google/issues</issue>
+  
+  <hook type="after_prepare" src="hooks/after_prepare/999-admobPluginNotice.js" />
+  
+  <js-module src="www/analytics.js" name="GAPlugin">
+    <merges target="analytics" />
+  </js-module>
+  
+
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="GAPlugin">
+        <param name="android-package" value="com.appfeel.cordova.analytics.CPGoogleAnalytics" />
+      </feature>
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <service android:name="com.google.analytics.tracking.android.CampaignTrackingService" />
+      <receiver android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver" android:exported="true">
+        <intent-filter>
+          <action android:name="com.android.vending.INSTALL_REFERRER" />
+        </intent-filter>
+      </receiver>
+    </config-file>
+    <source-file src="src/android/CPGoogleAnalytics.java" target-dir="src/com/appfeel/cordova/analytics" />
+    <lib-file src="src/android/libGoogleAnalyticsServices.jar" target-dir="libs" />
+  </platform>
+  
+  
+
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="GAPlugin">
+        <param name="ios-package" value="CDVGoogleAnalytics" />
+      </feature>
+    </config-file>
+
+    <header-file src="src/ios/CDVGoogleAnalytics.h" />
+    <source-file src="src/ios/CDVGoogleAnalytics.m" />
+
+    <header-file src="src/ios/GAIDictionaryBuilder.h" />
+    <header-file src="src/ios/GAIFields.h" />
+    <header-file src="src/ios/GAILogger.h" />
+    <header-file src="src/ios/GAITrackedViewController.h" />
+    <header-file src="src/ios/GAI.h" />
+    <header-file src="src/ios/GAITracker.h" />
+    <header-file src="src/ios/GAIEcommerceFields.h" />
+    <header-file src="src/ios/GAIEcommerceProduct.h" />
+    <header-file src="src/ios/GAIEcommerceProductAction.h" />
+    <header-file src="src/ios/GAIEcommercePromotion.h" />
+
+    <source-file src="src/ios/libGoogleAnalyticsServices.a" framework="true" />
+    
+    <framework src="SystemConfiguration.framework" />
+    <framework src="CoreData.framework" />
+    <framework src="libz.dylib" />
+    <framework src="libsqlite3.0.dylib" />
+  </platform>
+</plugin>
