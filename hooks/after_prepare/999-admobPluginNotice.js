@@ -8,7 +8,7 @@ module.exports = function (context) {
     pluginNames = context.opts.cordova.plugins;
 
   pluginNames.forEach(function (pluginName) {
-    if (~pluginNames.indexOf('com.admob.google')) {
+    if (~pluginNames.indexOf('com.admob.google') || ~pluginNames.indexOf('com.admob.admobads')) {
       showLegend = false;
     }
   });
