@@ -76,7 +76,7 @@ A JSON object contining the following optional values:
 * {Object} analytics.OPTIONS.CUSTOM_METRICS: JSON object with { metricIndex: metricValue, ... } pairs.
 * {String} analytics.OPTIONS.CAMPAIGN_URL: Campaign url. Example: http://www.appfeel.com?utm_campaign=analytics&utm_source=github ([see here for more info](https://developer.android.com/reference/com/google/android/gms/analytics/HitBuilders.HitBuilder.html#setCampaignParamsFromUrl(java.lang.String))).
 
-### Track Ecommerce ###
+### Track Ecommerce ###
 #### trackEcommerce(options, success, error);
 Tracks an ecommerce hit.
 *Note:* Options are optional if they are optional in Google Analytics SDK.
@@ -374,7 +374,7 @@ analytics.trackSocial("Facebook ", "Like", "faceboock.com/AppFeel.Inc");
 ```
 
 ### Configuration ###
-#### setDispatchPeriod(period, success, error);
+#### setDispatchPeriod(period, success, error);
 Specifies the dispatch period:
 
 * {Number}     period:   (Required) Dispatch period in seconds.

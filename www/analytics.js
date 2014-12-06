@@ -108,7 +108,7 @@ analytics.trackView = function (screenName, options, success, error) {
     options = {};
   }
 
-  options = options ||  {};
+  options = options || {};
   options[analytics.OPTIONS.SCREEN_NAME] = screenName;
   cordova.exec(success, error, 'GAPlugin', 'trackView', [options]);
 };
@@ -140,7 +140,7 @@ analytics.trackEvent = function (category, action, label, value, options, succes
     value = 0;
   }
 
-  options = options ||  {};
+  options = options || {};
   options[analytics.OPTIONS.CATEGORY] = category;
   options[analytics.OPTIONS.ACTION] = action;
   options[analytics.OPTIONS.LABEL] = label;
@@ -165,7 +165,7 @@ analytics.trackTiming = function (category, variable, value, label, options, suc
   if (typeof label === 'undefined' || label === null) {
     label = '';
   }
-  options = options ||  {};
+  options = options || {};
   options[analytics.OPTIONS.CATEGORY] = category;
   options[analytics.OPTIONS.VALUE] = value;
   options[analytics.OPTIONS.VARIABLE] = variable;
