@@ -98,7 +98,7 @@ static id<GAITracker> _tracker = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Tracker not started. Call startTrackerWithId('UA-XXXXXX'); first."];
 
     } else if ([args count] > 0) {
-        NSDictionary *options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary *options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         
         if (options) {
             NSString *screenName = [options objectForKey:CDVGA_OPT_SCREEN_NAME];
@@ -123,7 +123,7 @@ static id<GAITracker> _tracker = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Tracker not started. Call startTrackerWithId('UA-XXXXXX'); first."];
         
     } else if ([args count] > 0) {
-        NSDictionary *options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary *options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         
         if (options) {
             NSString *category = [options objectForKey:CDVGA_OPT_CATEGORY];
@@ -155,7 +155,7 @@ static id<GAITracker> _tracker = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Tracker not started. Call startTrackerWithId('UA-XXXXXX'); first."];
         
     } else if ([args count] > 0) {
-        NSDictionary *options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary *options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         
         if (options) {
             NSString *category = [options objectForKey:CDVGA_OPT_CATEGORY];
@@ -186,7 +186,7 @@ static id<GAITracker> _tracker = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Tracker not started. Call startTrackerWithId('UA-XXXXXX'); first."];
         
     } else if ([args count] > 0) {
-        NSDictionary *options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary *options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         
         if (options) {
             GAIDictionaryBuilder *builder;
@@ -261,7 +261,7 @@ static id<GAITracker> _tracker = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Tracker not started. Call startTrackerWithId('UA-XXXXXX'); first."];
         
     } else if ([args count] > 0) {
-        NSDictionary *options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary *options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         
         if (options) {
             NSString *promotionId = [options objectForKey:CDVGA_OPT_PROMOTION_ID];
@@ -331,7 +331,7 @@ static id<GAITracker> _tracker = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Tracker not started. Call startTrackerWithId('UA-XXXXXX'); first."];
         
     } else if ([args count] > 0) {
-        NSDictionary *options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary *options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         
         if (options) {
             NSString *network = [options objectForKey:CDVGA_OPT_NETWORK];
@@ -357,7 +357,7 @@ static id<GAITracker> _tracker = nil;
     NSArray *args = command.arguments;
     
     if ([args count] > 0) {
-        NSDictionary *options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary *options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         
         if (options) {
             NSString *appId = [options objectForKey:CDVGA_OPT_APP_ID];
@@ -397,7 +397,7 @@ static id<GAITracker> _tracker = nil;
 
 - (void) setCustomParams: (CDVInvokedUrlCommand*)command {
     if ([command.arguments count] > 0) {
-        NSDictionary *options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary *options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         NSArray *names = [options allKeys];
         NSString *name;
         int i;
