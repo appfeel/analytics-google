@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="com.analytics.google" version="1.1.0">
   <engines>
-    <engine name="cordova" version=">=3.8.0" />
+    <engine name="cordova" version=">=3.0.0" />
   </engines>
   <name>Google Analytics Plugin</name>
   <description>Phonegap, Cordova, Intel XDK Google Analytics plugin for iOS/Android with full support for views, events, timings, ecommerce and social. Supports userId and campaign url.</description>
