@@ -53,7 +53,7 @@ Tracks an event:
 * {String}     category: (Required) category of the event.
 * {String}     action:   (Required) action of the event.
 * {String}     label:    (Required) label of the event.
-* {String}     value:    (Required) value of the event.
+* {Long}       value:    (Required) value of the event.
 * {Object}     options:  (Optional) JSON object with additional options ([see options](#options)).
 * {function()} success:  (Optional) success callback.
 * {function()} failure:  (Optional) failure callback.
@@ -63,7 +63,7 @@ Tracks a timing hit:
 
 * {String}     category: (Required) category of the timing hit.
 * {String}     variable: (Required) measured variable (name) of the timing hit.
-* {String}     value:    (Required) value of the timing hit (time in milliseconds).
+* {Long}       value:    (Required) value of the timing hit (time in milliseconds).
 * {String}     label:    (Optional) label of the timing hit.
 * {Object}     options:  (Optional) JSON object with additional options ([see options](#options)).
 * {function()} success:  (Optional) success callback.
