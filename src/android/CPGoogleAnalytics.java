@@ -49,7 +49,7 @@ public class CPGoogleAnalytics extends CordovaPlugin {
   public static Tracker tracker = null;
 
   private static final String ACTION_START_TRACKER = "startTrackerWithId";
-  private static final String ACTION_SET_DISPATCH_PERIOD = "startDispatchPeriod";
+  private static final String ACTION_SET_DISPATCH_PERIOD = "setDispatchPeriod";
   private static final String ACTION_TRACK_VIEW = "trackView";
   private static final String ACTION_TRACK_EVENT = "trackEvent";
   private static final String ACTION_TRACK_TIMING = "trackTiming";
