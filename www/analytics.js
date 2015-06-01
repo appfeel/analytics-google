@@ -24,7 +24,7 @@
  SOFTWARE.
  */
 
-var analytics = module.exports;
+var analytics = window.analytics || {};
 
 analytics.OPTIONS = {
   SCREEN_NAME: "screenName",
@@ -226,3 +226,5 @@ analytics.setUserId = function (id, success, error) {
 analytics.setDebugMode = function (success, error) {
   cordova.exec(success, error, 'GAPlugin', 'setDebugMode', []);
 };
+
+window.analytics = analytics;
