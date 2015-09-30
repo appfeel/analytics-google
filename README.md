@@ -20,7 +20,7 @@ Prerequisites:
 
 To install this plugin, follow the [Command-line Interface Guide](http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface). You can use one of the following command lines:
 
-* `cordova plugin add com.analytics.google`
+* `cordova plugin add cordova-plugin-analytics`
 * `cordova plugin add https://github.com/appfeel/analytics-google.git`
 
 Make sure to review the Google Analytics [terms](http://www.google.com/analytics/terms/us.html) and [SDK Policy](https://developers.google.com/analytics/devguides/collection/protocol/policy)

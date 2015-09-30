@@ -8,15 +8,15 @@ module.exports = function (context) {
     pluginNames = context.opts.cordova.plugins;
 
   pluginNames.forEach(function (pluginName) {
-    if (~pluginNames.indexOf('com.admob.google') || ~pluginNames.indexOf('com.admob.admobads')) {
+    if (~pluginNames.indexOf('cordova-admob') || ~pluginNames.indexOf('cordova-admob-ads')) {
       showLegend = false;
     }
   });
 
   if (showLegend) {
     console.log();
-    console.log('*********** Monetize your app with AdMob ads. Now available with this cordova plugin:');
-    console.log('*********** cordova plugin add com.admob.google');
+    console.log('*********** Monetize your app with AdMob ads. Now available with this cordova / phonegap plugin:');
+    console.log('*********** cordova plugin add cordova-admob');
     console.log('*********** Docs: https://github.com/appfeel/admob-google-cordova');
     console.log();
   }
