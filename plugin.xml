@@ -29,8 +29,8 @@
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     </config-file>
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
-      <service android:name="com.google.analytics.tracking.android.CampaignTrackingService" />
-      <receiver android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver" android:exported="true">
+      <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
+      <receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver" android:exported="true">
         <intent-filter>
           <action android:name="com.android.vending.INSTALL_REFERRER" />
         </intent-filter>
