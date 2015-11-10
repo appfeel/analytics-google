@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-analytics",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Phonegap, Cordova, Intel XDK Google Analytics plugin for iOS/Android with full support for views, events, timings, ecommerce and social. Supports userId and campaign url.",
   "cordova": {
     "id": "cordova-plugin-analytics",
