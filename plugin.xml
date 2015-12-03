@@ -37,7 +37,7 @@
       </receiver>
     </config-file>
     <source-file src="src/android/CPGoogleAnalytics.java" target-dir="src/com/appfeel/cordova/analytics" />
-    <dependency id="cordova-google-play-services" />
+    <framework src="com.google.android.gms:play-services-analytics:+" />
   </platform>
   
   
