@@ -430,6 +430,11 @@ static id<GAITracker> _tracker = nil;
     [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
 }
 
+- (void) optOut:(CDVInvokedUrlCommand*)command {
+    BOOL optOut = [[command.arguments objectAtIndex:0] boolValue];
+    [[GAI sharedInstance] setOptOut:optOut];
+}
+
 #pragma mark -
 #pragma mark Internal functions
 
