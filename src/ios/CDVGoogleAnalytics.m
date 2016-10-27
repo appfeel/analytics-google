@@ -476,7 +476,7 @@ static id<GAITracker> _tracker = nil;
         }
 
         if ([options valueForKey:CDVGA_OPT_CURRENCY_CODE]) {
-            [tracker set:kGAICurrencyCode value:[options valueForKey:CDVGA_OPT_CURRENCY_CODE]];
+            [_tracker set:kGAICurrencyCode value:[options valueForKey:CDVGA_OPT_CURRENCY_CODE]];
         }
     }
     
