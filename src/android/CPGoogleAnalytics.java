@@ -80,6 +80,7 @@ public class CPGoogleAnalytics extends CordovaPlugin {
   private static final String OPT_APP_NAME = "appName";
   private static final String OPT_APP_VERSION = "appVersion";
 
+  private static final String OPT_CURRENCY_CODE = "currencyCode";
   private static final String OPT_PRODUCT_ID = "productId";
   private static final String OPT_PRODUCT_NAME = "productName";
   private static final String OPT_PRODUCT_CATEGORY = "productCategory";
@@ -789,7 +790,10 @@ public class CPGoogleAnalytics extends CordovaPlugin {
       } catch (SecurityException e) {
       } catch (NoSuchMethodException e) {
       }
+    }
 
+    if (options.has(OPT_CURRENCY_CODE)) {
+      tracker.set("&cu", options.optString(OPT_CAMPAIGN_URL));
     }
 
     if (options.has(OPT_CAMPAIGN_URL)) {

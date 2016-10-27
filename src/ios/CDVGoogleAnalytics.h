@@ -48,6 +48,7 @@
 #define CDVGA_OPT_APP_NAME                          @"appName"
 #define CDVGA_OPT_APP_VERSION                       @"appVersion"
 
+#define CDVGA_OPT_CURRENCY_CODE                     @"currencyCode"
 #define CDVGA_OPT_PRODUCT_ID                        @"productId"
 #define CDVGA_OPT_PRODUCT_NAME                      @"productName"
 #define CDVGA_OPT_PRODUCT_CATEGORY                  @"productCategory"

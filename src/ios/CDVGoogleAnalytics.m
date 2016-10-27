@@ -474,7 +474,10 @@ static id<GAITracker> _tracker = nil;
         if ([options valueForKey:CDVGA_OPT_CAMPAIGN_URL]) {
             campaignUrl = [options valueForKey:CDVGA_OPT_CAMPAIGN_URL];
         }
-        
+
+        if ([options valueForKey:CDVGA_OPT_CURRENCY_CODE]) {
+            [tracker set:kGAICurrencyCode value:[options valueForKey:CDVGA_OPT_CURRENCY_CODE]];
+        }
     }
     
     if (campaignUrl && campaignUrl.length > 0) {
