@@ -79,10 +79,12 @@ A JSON object contining the following optional values:
 ### Track Ecommerce ###
 #### trackEcommerce(options, success, error);
 Tracks an ecommerce hit.
-*Note:* Options are optional if they are optional in Google Analytics SDK.
-*Note:* You can optionally specify **CUSTOM_DIMENSIONS**, **CUSTOM_METRICS** and/or **CAMPAIGN_URL** in any tracking options object.
-*Note:* If PRODUCT_SCREEN_NAME, CATEGORY and ACTION values are provided in options, en event will be tracked instead a screen view.
-*Note:* If PRODUCT_SCREEN_NAME is specified, the tracking action will be senwith PRODUCT_SCREEN_NAME and then the tracker view will be set to previous screen value.
+
+*Notes:*
+- Options are optional if they are optional in Google Analytics SDK.
+- You can optionally specify **CUSTOM_DIMENSIONS**, **CUSTOM_METRICS** and/or **CAMPAIGN_URL** in any tracking options object.
+- If PRODUCT_SCREEN_NAME, CATEGORY and ACTION values are provided in options, en event will be tracked instead a screen view.
+- If PRODUCT_SCREEN_NAME is specified, the tracking action will be senwith PRODUCT_SCREEN_NAME and then the tracker view will be set to previous screen value.
 
 * {Object}     options:  (Optional) JSON object with ecommers options ([see ecommerce options](#ecommerce_examples)).
 * {function()} success:  (Optional) success callback.
@@ -90,10 +92,12 @@ Tracks an ecommerce hit.
 
 #### trackPromotion(options, success, error);
 Track a promotion:
-*Note:* Options are optional if they are optional in Google Analytics SDK.
-*Note:* You can optionally specify **CUSTOM_DIMENSIONS**, **CUSTOM_METRICS** and/or **CAMPAIGN_URL** in any tracking options object.
-*Note:* If PRODUCT_SCREEN_NAME, CATEGORY and ACTION values are provided in options, en event will be tracked instead a screen view.
-*Note:* If PRODUCT_SCREEN_NAME is specified, the tracking action will be senwith PRODUCT_SCREEN_NAME and then the tracker view will be set to previous screen value.
+
+*Notes:*
+- Options are optional if they are optional in Google Analytics SDK.
+- You can optionally specify **CUSTOM_DIMENSIONS**, **CUSTOM_METRICS** and/or **CAMPAIGN_URL** in any tracking options object.
+- If PRODUCT_SCREEN_NAME, CATEGORY and ACTION values are provided in options, en event will be tracked instead a screen view.
+- If PRODUCT_SCREEN_NAME is specified, the tracking action will be senwith PRODUCT_SCREEN_NAME and then the tracker view will be set to previous screen value.
 
 * {Object}     options:  (Optional) JSON object with ecommers options ([see ecommerce options](#ecommerce_examples)).
 * {function()} success:  (Optional) success callback.
