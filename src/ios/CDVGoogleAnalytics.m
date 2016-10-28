@@ -427,7 +427,9 @@ static id<GAITracker> _tracker = nil;
 }
 
 - (void) setDebugMode: (CDVInvokedUrlCommand*) command {
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 #pragma mark -
