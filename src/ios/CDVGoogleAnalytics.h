@@ -121,6 +121,7 @@
 - (void) setCustomParams: (CDVInvokedUrlCommand*)command;
 - (void) setUserId: (CDVInvokedUrlCommand*)command;
 - (void) setDebugMode: (CDVInvokedUrlCommand*)command;
+- (void) optOut:(CDVInvokedUrlCommand*)command;
 
 @end
 

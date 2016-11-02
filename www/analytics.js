@@ -227,4 +227,8 @@ analytics.setDebugMode = function (success, error) {
   cordova.exec(success, error, 'GAPlugin', 'setDebugMode', []);
 };
 
+analytics.optOut = function(optOut) {
+    cordova.exec(null, null, "GAPlugin", "optOut", [optOut]);
+};
+
 window.analytics = analytics;

@@ -103,7 +103,7 @@ static id<GAITracker> _tracker = nil;
         if (options) {
             NSString *screenName = [options objectForKey:CDVGA_OPT_SCREEN_NAME];
             if (screenName && screenName.length > 0) {
-                GAIDictionaryBuilder *builder = [self prepareBuilder:[GAIDictionaryBuilder createAppView] withOptions:options];
+                GAIDictionaryBuilder *builder = [self prepareBuilder:[GAIDictionaryBuilder createScreenView] withOptions:options];
                 _actualScreen = screenName;
                 [_tracker set:kGAIScreenName value:screenName];
                 [_tracker send:[builder build]];
@@ -430,6 +430,11 @@ static id<GAITracker> _tracker = nil;
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void) optOut:(CDVInvokedUrlCommand*)command {
+    BOOL optOut = [[command.arguments objectAtIndex:0] boolValue];
+    [[GAI sharedInstance] setOptOut:optOut];
 }
 
 #pragma mark -
