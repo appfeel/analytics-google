@@ -3,6 +3,9 @@
   <engines>
     <engine name="cordova" version=">=3.0.0" />
   </engines>
+
+  <dependency id="cordova-play-services-version-adapter" />
+
   <name>Google Analytics Plugin</name>
   <description>Phonegap, Cordova, Intel XDK Google Analytics plugin for iOS/Android with full support for views, events, timings, ecommerce and social. Supports userId and campaign url.</description>
   <author email="info@appfeel.com" href="https://github.com/appfeel/admob-google-cordova">AppFeel</author>
@@ -37,7 +40,7 @@
       </receiver>
     </config-file>
     <source-file src="src/android/CPGoogleAnalytics.java" target-dir="src/com/appfeel/cordova/analytics" />
-    <framework src="com.google.android.gms:play-services-analytics:+" />
+    <framework src="com.google.android.gms:play-services-analytics:15.0.0" />
   </platform>
   
   
