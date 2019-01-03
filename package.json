@@ -32,12 +32,10 @@
     "cordova-android",
     "cordova-ios"
   ],
-  "engines": [
-    {
-      "name": "cordova",
-      "version": ">=4.0.0"
-    }
-  ],
+  "engines": {
+    "name": "cordova",
+    "version": ">=4.0.0"
+  },
   "author": "AppFeel",
   "license": "MIT",
   "bugs": {
