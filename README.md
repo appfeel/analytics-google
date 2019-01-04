@@ -51,7 +51,7 @@ Using predefined [FirebaseAnalytics.Event](https://firebase.google.com/docs/refe
 **eventName**: predefined events available see Firebase:
 
 | Type | Event name | Description |
------------------------------------
+| ---- | ---------- | ----------- |
 | String | ADD_PAYMENT_INFO | Add Payment Info event. |
 | String | ADD_TO_CART | E-Commerce Add To Cart event. |
 | String | ADD_TO_WISHLIST | E-Commerce Add To Wishlist event. |
@@ -91,8 +91,8 @@ analytics.logEvent(analytics.DEFAULT_EVENTS.ADD_PAYMENT_INFO, {});
 
 **eventParams**: predefined params, see Firebase Params:
 
-|Type | Param name | Description |
------------------------------------
+| Type | Param name | Description |
+| ---- | ---------- | ----------- |
 | String | ACHIEVEMENT_ID | Game achievement ID (String). |
 | String | ACLID | CAMPAIGN_DETAILS click ID. |
 | String | AFFILIATION | The store or affiliation from which this transaction occurred. |
@@ -153,7 +153,7 @@ params['my param'] = 'my value';
 analytics.logEvent(analytics.DEFAULT_EVENTS.ADD_PAYMENT_INFO, params);
 ```
 
-### resetAnalyticsData(success, error)
+### resetAnalyticsData(success, error)
 Clears all analytics data for this app from the device and resets the app instance id. (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#resetAnalyticsData)
 
 ### setAnalyticsCollectionEnabled(success, error)
@@ -175,5 +175,5 @@ Sets the user ID property. This feature must be used in accordance with Google's
 ### setUserProperty(userPropertyName, userPropertyValue, success, error)
 Sets a user property to a given value. Up to 25 user property names are supported. Once set, user property values persist throughout the app lifecycle and across sessions. (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#setUserProperty)
 
-* {string} serPropertyName: (Required) The user property name
-* {string} userPropertyValue: (Required) The user property value
+* {string} `serPropertyName`: (Required) The user property name
+* {string} `userPropertyValue`: (Required) The user property value
