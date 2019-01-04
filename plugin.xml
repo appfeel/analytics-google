@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-analytics" version="1.5.1">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-analytics" version="2.0.0">
   <engines>
-    <engine name="cordova" version=">=3.0.0" />
+    <engine name="cordova" version=">=4.0.0" />
   </engines>
 
   <dependency id="cordova-play-services-version-adapter" />
+  <dependency id="cordova-annotated-plugin-android" />
 
-  <name>Google Analytics Plugin</name>
-  <description>Phonegap, Cordova, Intel XDK Google Analytics plugin for iOS/Android with full support for views, events, timings, ecommerce and social. Supports userId and campaign url.</description>
+  <name>Google Analytics Firebase Plugin</name>
+  <description>Phonegap, Cordova, Ionic, Intel XDK Google Analytics Firebase plugin for iOS/Android with full support for views, events, timings, ecommerce and social.</description>
   <author email="info@appfeel.com" href="https://github.com/appfeel/admob-google-cordova">AppFeel</author>
   <license>MIT</license>
   <keywords>analytics,google,metrics,event,screen,ecommerce,ua,universal analytics,universal,referral,download,install,track,tracking</keywords>
@@ -20,11 +21,10 @@
     <merges target="analytics" />
   </js-module>
   
-
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="GAPlugin">
-        <param name="android-package" value="com.appfeel.cordova.analytics.CPGoogleAnalytics" />
+        <param name="android-package" value="com.appfeel.cordova.analytics.GAPlugin" />
       </feature>
     </config-file>
     <config-file target="AndroidManifest.xml" parent="/*">
@@ -39,35 +39,19 @@
         </intent-filter>
       </receiver>
     </config-file>
-    <source-file src="src/android/CPGoogleAnalytics.java" target-dir="src/com/appfeel/cordova/analytics" />
-    <framework src="com.google.android.gms:play-services-analytics:15.0.0" />
+    <framework src="com.google.firebase:firebase-analytics:15.0.0"/>
+    <source-file src="src/android/GAPlugin.java" target-dir="src/com/appfeel/cordova/analytics" />
   </platform>
   
-  
-
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
       <feature name="GAPlugin">
         <param name="ios-package" value="CDVGoogleAnalytics" />
       </feature>
     </config-file>
-
     <header-file src="src/ios/CDVGoogleAnalytics.h" />
     <source-file src="src/ios/CDVGoogleAnalytics.m" />
-
-    <header-file src="src/ios/GAI.h" />
-    <header-file src="src/ios/GAIDictionaryBuilder.h" />
-    <header-file src="src/ios/GAIEcommerceFields.h" />
-    <header-file src="src/ios/GAIEcommerceProduct.h" />
-    <header-file src="src/ios/GAIEcommerceProductAction.h" />
-    <header-file src="src/ios/GAIEcommercePromotion.h" />
-    <header-file src="src/ios/GAIFields.h" />
-    <header-file src="src/ios/GAILogger.h" />
-    <header-file src="src/ios/GAITrackedViewController.h" />
-    <header-file src="src/ios/GAITracker.h" />
-    
-    <source-file src="src/ios/libGoogleAnalyticsServices.a" framework="true" />
-    
+    <framework src="FirebaseAnalytics" type="podspec" spec=">= 4.0.0"/>
     <framework src="SystemConfiguration.framework" />
     <framework src="CoreData.framework" />
     <framework src="libz.dylib" />

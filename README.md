@@ -1,446 +1,179 @@
-Google Analytics Plugin
-=======================
+Google Analytics Firebase Plugin
+================================
+Phonegap, Cordova, Ionic, Intel XDK Google Analytics Firebase plugin for iOS/Android with full support for views, events, timings, ecommerce and social.
+Ionic Native on the way.
 
-Cordova (PhoneGap) 3.0+ Plugin to connect to Google Analytics native SDK.
+**WARNING**: the previous version (1.5) is broken as Google no longer supports native app analytics without Firebase
 
-Prerequisites:
+**Prerequisites**:
+
 * A Cordova 3.0+ project for iOS and/or Android
-* A Mobile App property through the Google Analytics Admin Console
-
-*Note:* [Demo Project](https://github.com/appfeel/analytics-google-demo) available.
-
----
-## Platform SDK supported ##
-
-* iOS, using Google Analytics SDK for iOS, v3.10
-* Android, using Google Play Services for Android, v6.1
+* A Firebase project
+* Download Google-services.json (android) and GoogleService-info.plist (ios) from Firebase console
+*Note:* [Ionic Demo Project](https://gihub.com/appfeel/ionic-admob-analytics-push-quickstarter) on the way.
 
 ---
-## Quick start ##
+## Platform SDK supported
+* iOS, using Google Analytics Firebase
+* Android, using Google Analytics Firebase
 
-To install this plugin, follow the [Command-line Interface Guide](http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface). You can use one of the following command lines:
+---
+## Quick start
+To install this plugin, follow the [Command-line Interface Guide](http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface). You can use the following command line:
 
-* `cordova plugin add cordova-plugin-analytics`
-* `cordova plugin add https://github.com/appfeel/analytics-google.git`
+* `cordova plugin add cordova-plugin-analytics --save`
 
 Make sure to review the Google Analytics [terms](http://www.google.com/analytics/terms/us.html) and [SDK Policy](https://developers.google.com/analytics/devguides/collection/protocol/policy)
 
 ---
-## Javascript API ##
+## Javascript API
+*Note*: All success callbacks are in the form `'function () {}'`, and all failure callbacks are in the form `'function (err) {}'` where `err` is a String explaining the error reason.
 
-*Note:* All success callbacks are in the form `'function () {}'`, and all failure callbacks are in the form `'function (err) {}'` where `err` is a String explaining the error reason.
+* {function()} `success`: (Optional) success callback.
+* {function()} `failure`: (Optional) failure callback.
 
-### Start Google Analytics ###
-#### startTrackerWithId(id, success, fail);
-Start Analtytics tracker:
+### setCurrentScreen(screenName, success, error)
+Sets the current screen name, which specifies the current visual context in your app. This helps identify the areas in your app where users spend their time and how they interact with your app. (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#setCurrentScreen)
 
-* {String}     id:      (Required) your Google Analytics Universal code: UA-XXXXXXX-X.
-* {function()} success: (Optional) success callback.
-* {function()} failure: (Optional) failure callback.
+* {String} `screenName`: (Required) the name of the screen to track.
 
-### Track Views, Events and Timings ###
-#### trackView(screenName, options, success, error);
-Tracks a screen view.
+*Note*: All screens classes will be tracked as MainActivity in android, and MainViewController in ios, as it is cordova default. You should filter by screen names. It is not possible to change screen class.
 
-* {String}     screenName: (Required) the name of the screen to track.
-* {Object}     options:    (Optional) JSON object with additional options ([see options](#options)).
-* {function()} success:    (Optional) success callback.
-* {function()} failure:    (Optional) failure callback.
+### logEvent(eventName, options, success, failure)
+Logs an app event. The event can have up to 25 parameters.
+Events with the same name must have the same parameters.
+Up to 500 event names are supported.
+Using predefined [FirebaseAnalytics.Event](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event.html) and/or [FirebaseAnalytics.Param](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Param.html) is recommended for optimal reporting. (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#logEvent)
 
-#### trackEvent(category, action, label, value, options, success, error);
-Tracks an event:
+* {String} `eventName`: (Required) the name of the event to track (custom or predefined, see below).
+* {Object} `options`: (Optional) JSON object with additional options (see options).
 
-* {String}     category: (Required) category of the event.
-* {String}     action:   (Required) action of the event.
-* {String}     label:    (Required) label of the event.
-* {Long}       value:    (Required) value of the event.
-* {Object}     options:  (Optional) JSON object with additional options ([see options](#options)).
-* {function()} success:  (Optional) success callback.
-* {function()} failure:  (Optional) failure callback.
+**eventName**: predefined events available see Firebase:
 
-#### trackTiming(category, variable, value, label, options, success, error);
-Tracks a timing hit:
+| Type | Event name | Description |
+| ---- | ---------- | ----------- |
+| String | ADD_PAYMENT_INFO | Add Payment Info event. |
+| String | ADD_TO_CART | E-Commerce Add To Cart event. |
+| String | ADD_TO_WISHLIST | E-Commerce Add To Wishlist event. |
+| String | APP_OPEN | App Open event. |
+| String | BEGIN_CHECKOUT | E-Commerce Begin Checkout event. |
+| String | CAMPAIGN_DETAILS | Log this event to supply the referral details of a re-engagement campaign. |
+| String | CHECKOUT_PROGRESS | Checkout progress. |
+| String | EARN_VIRTUAL_CURRENCY | Earn Virtual Currency event. |
+| String | ECOMMERCE_PURCHASE | E-Commerce Purchase event. |
+| String | GENERATE_LEAD | Generate Lead event. |
+| String | JOIN_GROUP | Join Group event. |
+| String | LEVEL_END | Level End event. |
+| String | LEVEL_START | Level Start event. |
+| String | LEVEL_UP | Level Up event. |
+| String | LOGIN | Login event. |
+| String | POST_SCORE | Post Score event. |
+| String | PRESENT_OFFER | Present Offer event. |
+| String | PURCHASE_REFUND | E-Commerce Purchase Refund event. |
+| String | REMOVE_FROM_CART | Remove from cart event. |
+| String | SEARCH | Search event. |
+| String | SELECT_CONTENT | Select Content event. |
+| String | SET_CHECKOUT_OPTION | Set checkout option. |
+| String | SHARE | Share event. |
+| String | SIGN_UP | Sign Up event. |
+| String | SPEND_VIRTUAL_CURRENCY | Spend Virtual Currency event. |
+| String | TUTORIAL_BEGIN | Tutorial Begin event. |
+| String | TUTORIAL_COMPLETE | Tutorial End event. |
+| String | UNLOCK_ACHIEVEMENT | Unlock Achievement event. |
+| String | VIEW_ITEM | View Item event. |
+| String | VIEW_ITEM_LIST | View Item List event. |
+| String | VIEW_SEARCH_RESULTS | View Search Results event. |
+Way to use predefined events:
 
-* {String}     category: (Required) category of the timing hit.
-* {String}     variable: (Required) measured variable (name) of the timing hit.
-* {Long}       value:    (Required) value of the timing hit (time in milliseconds).
-* {String}     label:    (Optional) label of the timing hit.
-* {Object}     options:  (Optional) JSON object with additional options ([see options](#options)).
-* {function()} success:  (Optional) success callback.
-* {function()} failure:  (Optional) failure callback.
-
-### options
-A JSON object contining the following optional values:
-
-* {Object} analytics.OPTIONS.CUSTOM_DIMENSIONS: JSON object with { dimensionIndex: dimensionValue, ... } pairs.
-* {Object} analytics.OPTIONS.CUSTOM_METRICS: JSON object with { metricIndex: metricValue, ... } pairs.
-* {String} analytics.OPTIONS.CAMPAIGN_URL: Campaign url. Example: http://www.appfeel.com?utm_campaign=analytics&utm_source=github ([see here for more info](https://developer.android.com/reference/com/google/android/gms/analytics/HitBuilders.HitBuilder.html#setCampaignParamsFromUrl(java.lang.String))).
-
-### Track Ecommerce ###
-#### trackEcommerce(options, success, error);
-Tracks an ecommerce hit.
-
-*Notes:*
-- Options are optional if they are optional in Google Analytics SDK.
-- You can optionally specify **CUSTOM_DIMENSIONS**, **CUSTOM_METRICS** and/or **CAMPAIGN_URL** in any tracking options object.
-- If PRODUCT_SCREEN_NAME, CATEGORY and ACTION values are provided in options, en event will be tracked instead a screen view.
-- If PRODUCT_SCREEN_NAME is specified, the tracking action will be senwith PRODUCT_SCREEN_NAME and then the tracker view will be set to previous screen value.
-
-* {Object}     options:  (Optional) JSON object with ecommers options ([see ecommerce options](#ecommerce_examples)).
-* {function()} success:  (Optional) success callback.
-* {function()} failure:  (Optional) failure callback.
-
-#### trackPromotion(options, success, error);
-Track a promotion:
-
-*Notes:*
-- Options are optional if they are optional in Google Analytics SDK.
-- You can optionally specify **CUSTOM_DIMENSIONS**, **CUSTOM_METRICS** and/or **CAMPAIGN_URL** in any tracking options object.
-- If PRODUCT_SCREEN_NAME, CATEGORY and ACTION values are provided in options, en event will be tracked instead a screen view.
-- If PRODUCT_SCREEN_NAME is specified, the tracking action will be senwith PRODUCT_SCREEN_NAME and then the tracker view will be set to previous screen value.
-
-* {Object}     options:  (Optional) JSON object with ecommers options ([see ecommerce options](#ecommerce_examples)).
-* {function()} success:  (Optional) success callback.
-* {function()} failure:  (Optional) failure callback.
-
-#### Ecommerce examples
-*Note:* [See Google Documentation](https://developers.google.com/analytics/devguides/collection/ios/v3/enhanced-ecommerce) for a more detailed explanation.
-
-##### Specifying Currency:
-
-    analytics.setCustomParam("&cu", "EUR");
-
-##### Measuring impressions:
-
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12345";
-    options[analytics.OPTIONS.PRODUCT_NAME] = "AppFeel Warhol T-Shirt";
-    options[analytics.OPTIONS.PRODUCT_CATEGORY] = "Apparel/T-Shirts";
-    options[analytics.OPTIONS.PRODUCT_BRAND] = "AppFeel";
-    options[analytics.OPTIONS.PRODUCT_VARIANT] = "Black";
-    options[analytics.OPTIONS.PRODUCT_POSITION] = 2;
-    options[analytics.OPTIONS.PRODUCT_SCREEN_NAME] = "My Impression Screen";
-    options[analytics.OPTIONS.PRODUCT_QUANTITY] = 2;
-    options[analytics.OPTIONS.PRODUCT_PRICE] = 18.99;
-    options[analytics.OPTIONS.PRODUCT_LIST] = "Search Results";
-    options[analytics.OPTIONS.CUSTOM_DIMENSIONS] = {
-      1: "Member"
-    };
-    options[analytics.OPTIONS.CUSTOM_METRICS] = {
-      1: 30,
-      4: 1.23
-    };
-    
-    analytics.trackEcommerce(options);
+```js
+analytics.logEvent(analytics.DEFAULT_EVENTS.ADD_PAYMENT_INFO, {});
 ```
 
-##### Measuring actions:
+**eventParams**: predefined params, see Firebase Params:
 
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12345";
-    options[analytics.OPTIONS.PRODUCT_NAME] = "AppFeel Warhol T-Shirt";
-    options[analytics.OPTIONS.PRODUCT_CATEGORY] = "Apparel/T-Shirts";
-    options[analytics.OPTIONS.PRODUCT_BRAND] = "AppFeel";
-    options[analytics.OPTIONS.PRODUCT_VARIANT] = "Black";
-    options[analytics.OPTIONS.PRODUCT_POSITION] = 2;
-    options[analytics.OPTIONS.PRODUCT_SCREEN_NAME] = "My Impression Screen";
-    options[analytics.OPTIONS.PRODUCT_QUANTITY] = 2;
-    options[analytics.OPTIONS.PRODUCT_PRICE] = 18.99;
-    options[analytics.OPTIONS.PRODUCT_LIST] = "Related Products";
-    options[analytics.OPTIONS.PRODUCT_LIST_SOURCE] = "My product list source";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_CLICK;
-    
-    analytics.trackEcommerce(options);
+| Type | Param name | Description |
+| ---- | ---------- | ----------- |
+| String | ACHIEVEMENT_ID | Game achievement ID (String). |
+| String | ACLID | CAMPAIGN_DETAILS click ID. |
+| String | AFFILIATION | The store or affiliation from which this transaction occurred. |
+| String | CAMPAIGN | CAMPAIGN_DETAILS name; used for keyword analysis to identify a specific product promotion or strategic campaign. |
+| String | CHARACTER | Character used in game (String). |
+| String | CHECKOUT_OPTION | Some option on a step in an ecommerce flow. |
+| String | CHECKOUT_STEP | The checkout step (1..N). |
+| String | CONTENT | CAMPAIGN_DETAILS content; used for A/B testing and content-targeted ads to differentiate ads or links that point to the same URL. |
+| String | CONTENT_TYPE | Type of content selected (String). |
+| String | COUPON | Coupon code for a purchasable item (String). |
+| String | CP1 | CAMPAIGN_DETAILS custom parameter. |
+| String | CREATIVE_NAME | The name of a creative used in a promotional spot. |
+| String | CREATIVE_SLOT | The name of a creative slot. |
+| String | CURRENCY | Purchase currency in 3 letter ISO_4217 format (String). |
+| String | DESTINATION | Flight or Travel destination (String). |
+| String | END_DATE | The arrival date, check-out date, or rental end date for the item (String). |
+| String | FLIGHT_NUMBER | Flight number for travel events (String). |
+| String | GROUP_ID | Group/clan/guild id (String). |
+| String | INDEX | The index of an item in a list. |
+| String | ITEM_BRAND | Item brand. |
+| String | ITEM_CATEGORY | Item category (String). |
+| String | ITEM_ID | Item ID (String). |
+| String | ITEM_LIST | The list in which the item was presented to the user. |
+| String | ITEM_LOCATION_ID | The Google Place ID that corresponds to the associated item (String). |
+| String | ITEM_NAME | Item name (String). |
+| String | ITEM_VARIANT | Item variant. |
+| String | LEVEL | Level in game (long). |
+| String | LEVEL_NAME | The name of a level in a game (String). |
+| String | LOCATION | Location (String). |
+| String | MEDIUM | CAMPAIGN_DETAILS medium; used to identify a medium such as email or cost-per-click (cpc). |
+| String | METHOD | A particular approach used in an operation; for example, "facebook" or "email" in the context of a sign_up or login event. |
+| String | NUMBER_OF_NIGHTS | Number of nights staying at hotel (long). |
+| String | NUMBER_OF_PASSENGERS | Number of passengers traveling (long). |
+| String | NUMBER_OF_ROOMS | Number of rooms for travel events (long). |
+| String | ORIGIN | Flight or Travel origin (String). |
+| String | PRICE | Purchase price (double). |
+| String | QUANTITY | Purchase quantity (long). |
+| String | SCORE | Score in game (long). |
+| String | SEARCH_TERM | The search string/keywords used (String). |
+| String | SHIPPING | Shipping cost (double). |
+| String | SIGN_UP_METHOD | This constant was deprecated. Use METHOD instead. |
+| String | SOURCE | CAMPAIGN_DETAILS source; used to identify a search engine, newsletter, or other source. |
+| String | START_DATE | The departure date, check-in date, or rental start date for the item (String). |
+| String | SUCCESS | The result of an operation (long). |
+| String | TAX | Tax amount (double). |
+| String | TERM | CAMPAIGN_DETAILS term; used with paid search to supply the keywords for ads. |
+| String | TRANSACTION_ID | A single ID for a ecommerce group transaction (String). |
+| String | TRAVEL_CLASS | Travel class (String). |
+| String | VALUE | A context-specific numeric value which is accumulated automatically for each event type. |
+| String | VIRTUAL_CURRENCY_NAME | Name of virtual currency type (String). |
+
+Way to use predefined params:
+
+```js
+const params = {};
+params[analytics.DEFAULT_PARAMS.CURRENCY] = 'Euro';
+params['my param'] = 'my value';
+analytics.logEvent(analytics.DEFAULT_EVENTS.ADD_PAYMENT_INFO, params);
 ```
 
-##### Measuring impressions and actions:
+### resetAnalyticsData(success, error)
+Clears all analytics data for this app from the device and resets the app instance id. (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#resetAnalyticsData)
 
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12345";
-    options[analytics.OPTIONS.PRODUCT_NAME] = "AppFeel Warhol T-Shirt";
-    options[analytics.OPTIONS.PRODUCT_CATEGORY] = "Apparel/T-Shirts";
-    options[analytics.OPTIONS.PRODUCT_BRAND] = "AppFeel";
-    options[analytics.OPTIONS.PRODUCT_VARIANT] = "Black";
-    options[analytics.OPTIONS.PRODUCT_POSITION] = 2;
-    options[analytics.OPTIONS.PRODUCT_SCREEN_NAME] = "My Impression Screen";
-    options[analytics.OPTIONS.PRODUCT_QUANTITY] = 2;
-    options[analytics.OPTIONS.PRODUCT_PRICE] = 18.99;
-    options[analytics.OPTIONS.PRODUCT_LIST] = "Related Products";
-    options[analytics.OPTIONS.PRODUCT_LIST_SOURCE] = "My product list source";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_DETAIL;
-    options[analytics.OPTIONS.RELATED_PRODUCT_ID] = "P12346";
-    options[analytics.OPTIONS.RELATED_PRODUCT_NAME] = "AppFeel Warhol T-Shirt";
-    options[analytics.OPTIONS.RELATED_PRODUCT_CATEGORY] = "Apparel/T-Shirts";
-    options[analytics.OPTIONS.RELATED_PRODUCT_BRAND] = "AppFeel";
-    options[analytics.OPTIONS.RELATED_PRODUCT_VARIANT] = "White";
-    options[analytics.OPTIONS.RELATED_PRODUCT_POSITION] = 2;
-    options[analytics.OPTIONS.RELATED_PRODUCT_SCREEN_NAME] = "My Impression Screen";
-    options[analytics.OPTIONS.RELATED_PRODUCT_QUANTITY] = 2;
-    options[analytics.OPTIONS.RELATED_PRODUCT_PRICE] = 18.99;
-    
-    analytics.trackEcommerce(options);
-```
+### setAnalyticsCollectionEnabled(success, error)
+Sets whether analytics collection is enabled for this app on this device. This setting is persisted across app sessions. By default it is enabled. (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#setAnalyticsCollectionEnabled)
 
-##### Measuring add to chart:
+### setMinimumSessionDuration(success, error)
+Sets the minimum engagement time required before starting a session. The default value is 10000 (10 seconds). (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#setMinimumSessionDuration)
 
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12345";
-    options[analytics.OPTIONS.PRODUCT_NAME] = "AppFeel Warhol T-Shirt";
-    options[analytics.OPTIONS.PRODUCT_CATEGORY] = "Apparel/T-Shirts";
-    options[analytics.OPTIONS.PRODUCT_BRAND] = "AppFeel";
-    options[analytics.OPTIONS.PRODUCT_VARIANT] = "Black";
-    options[analytics.OPTIONS.PRODUCT_POSITION] = 2;
-    options[analytics.OPTIONS.PRODUCT_SCREEN_NAME] = "My Impression Screen";
-    options[analytics.OPTIONS.PRODUCT_QUANTITY] = 2;
-    options[analytics.OPTIONS.PRODUCT_PRICE] = 18.99;
-    options[analytics.OPTIONS.PRODUCT_COUPON_CODE] = "APPARELSALE";
-    options[analytics.OPTIONS.CATEGORY] = "Ecommerce";
-    options[analytics.OPTIONS.ACTION] = "+Chart";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_ADD;
-    
-    analytics.trackEcommerce(options);
-```
+### setSessionTimeoutDuration(milliseconds, success, error)
+Sets the duration of inactivity that terminates the current session. The default value is 1800000 (30 minutes). (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#setSessionTimeoutDuration)
 
-##### Measuring remove from chart:
+* {number} `milliseconds`: (Required) The timeout in milliseconds
 
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12345";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_REMOVE;
-    
-    analytics.trackEcommerce(options);
-```
+### setUserId(userId, success, error)
+Sets the user ID property. This feature must be used in accordance with Google's Privacy Policy. (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#setUserId)
 
-##### Measuring checkout process:
+* {string} `userId`: (Required) The user id
 
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12345";
-    options[analytics.OPTIONS.PRODUCT_NAME] = "AppFeel Warhol T-Shirt";
-    options[analytics.OPTIONS.PRODUCT_CATEGORY] = "Apparel/T-Shirts";
-    options[analytics.OPTIONS.PRODUCT_BRAND] = "AppFeel";
-    options[analytics.OPTIONS.PRODUCT_VARIANT] = "Black";
-    options[analytics.OPTIONS.PRODUCT_POSITION] = 2;
-    options[analytics.OPTIONS.PRODUCT_SCREEN_NAME] = "My Impression Screen";
-    options[analytics.OPTIONS.PRODUCT_QUANTITY] = 2;
-    options[analytics.OPTIONS.PRODUCT_PRICE] = 18.99;
-    options[analytics.OPTIONS.PRODUCT_COUPON_CODE] = "APPARELSALE";
-    options[analytics.OPTIONS.CATEGORY] = "Ecommerce";
-    options[analytics.OPTIONS.ACTION] = "Checkout";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_CHECKOUT;
-    options[analytics.OPTIONS.CHECKOUT_STEP] = 1;
-    options[analytics.OPTIONS.CHECKOUT_OPTION] = "Visa";
-    
-    analytics.trackEcommerce(options);
-```
+### setUserProperty(userPropertyName, userPropertyValue, success, error)
+Sets a user property to a given value. Up to 25 user property names are supported. Once set, user property values persist throughout the app lifecycle and across sessions. (https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#setUserProperty)
 
-##### Measure a changed checkout option:
-
-*Note:* You should not set any product or impression values.
-
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.CATEGORY] = "Ecommerce";
-    options[analytics.OPTIONS.ACTION] = "CheckoutOption";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_CHECKOUT_OPTION;
-    options[analytics.OPTIONS.CHECKOUT_STEP] = 1;
-    options[analytics.OPTIONS.CHECKOUT_OPTION] = "Fedex";
-    
-    analytics.trackEcommerce(options);
-```
-
-##### Measuring transactions:
-
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12345";
-    options[analytics.OPTIONS.PRODUCT_NAME] = "AppFeel Warhol T-Shirt";
-    options[analytics.OPTIONS.PRODUCT_CATEGORY] = "Apparel/T-Shirts";
-    options[analytics.OPTIONS.PRODUCT_BRAND] = "AppFeel";
-    options[analytics.OPTIONS.PRODUCT_VARIANT] = "Black";
-    options[analytics.OPTIONS.PRODUCT_POSITION] = 2;
-    options[analytics.OPTIONS.PRODUCT_SCREEN_NAME] = "My Impression Screen";
-    options[analytics.OPTIONS.PRODUCT_QUANTITY] = 2;
-    options[analytics.OPTIONS.PRODUCT_PRICE] = 18.99;
-    options[analytics.OPTIONS.PRODUCT_COUPON_CODE] = "APPARELSALE";
-    options[analytics.OPTIONS.PRODUCT_LIST] = "Search Results";
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12346";
-    options[analytics.OPTIONS.PRODUCT_NAME] = "AppFeel Warhol T-Shirt";
-    options[analytics.OPTIONS.PRODUCT_CATEGORY] = "Apparel/T-Shirts";
-    options[analytics.OPTIONS.PRODUCT_BRAND] = "AppFeel";
-    options[analytics.OPTIONS.PRODUCT_VARIANT] = "White";
-    options[analytics.OPTIONS.PRODUCT_POSITION] = 2;
-    options[analytics.OPTIONS.PRODUCT_SCREEN_NAME] = "My Impression Screen";
-    options[analytics.OPTIONS.PRODUCT_QUANTITY] = 2;
-    options[analytics.OPTIONS.PRODUCT_PRICE] = 18.99;
-    options[analytics.OPTIONS.PRODUCT_COUPON_CODE] = "APPARELSALE";
-    options[analytics.OPTIONS.PRODUCT_LIST] = "Search Results";
-    options[analytics.OPTIONS.CATEGORY] = "Ecommerce";
-    options[analytics.OPTIONS.ACTION] = "Purchase";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_PURCHASE;
-    options[analytics.OPTIONS.TRANSACTION_ID] = "T12345";
-    options[analytics.OPTIONS.TRANSACTION_AFFILIATION] = "AppFeel Store - Online";
-    options[analytics.OPTIONS.TRANSACTION_REVENUE] = 13.29;
-    options[analytics.OPTIONS.TRANSACTION_TAX] = 5.70;
-    options[analytics.OPTIONS.TRANSACTION_SHIPPING] = 5.00;
-    options[analytics.OPTIONS.TRANSACTION_COUPON_CODE] = "SUMMER2014";
-    
-    analytics.trackEcommerce(options);
-```
-    
-##### Measuring refunds:
-
-Partial refund:
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.PRODUCT_ID] = "P12346";
-    options[analytics.OPTIONS.PRODUCT_QUANTITY] = 1;
-    options[analytics.OPTIONS.CATEGORY] = "Ecommerce";
-    options[analytics.OPTIONS.ACTION] = "Refund";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_REFUND;
-    options[analytics.OPTIONS.TRANSACTION_ID] = "T12345";
-    
-    analytics.trackEcommerce(options);
-```
-
-Entire transaction:
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.CATEGORY] = "Ecommerce";
-    options[analytics.OPTIONS.ACTION] = "Refund";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_REFUND;
-    options[analytics.OPTIONS.TRANSACTION_ID] = "T12345";
-    
-    analytics.trackEcommerce(options);
-```
-
-##### Measuring promotion impressions:
-
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.CATEGORY] = "Ecommerce";
-    options[analytics.OPTIONS.ACTION] = "Promotion-view";
-    options[analytics.OPTIONS.PROMOTION_ID] = "PROMO_1234 ";
-    options[analytics.OPTIONS.PROMOTION_NAME] = "Summer Sale";
-    options[analytics.OPTIONS.PROMOTION_CREATIVE] = "summer_banner2";
-    options[analytics.OPTIONS.PROMOTION_POSITION] = "banner_slot1";
-    
-    analytics.trackPromotion(options);
-```
-
-##### Measuring promotion clicks:
-
-```javascript
-    var options = {};
-    
-    options[analytics.OPTIONS.CATEGORY] = "Ecommerce";
-    options[analytics.OPTIONS.ACTION] = "Promotion-click";
-    options[analytics.OPTIONS.LABEL] = "Summer Sale";
-    options[analytics.OPTIONS.PROMOTION_ID] = "PROMO_1234 ";
-    options[analytics.OPTIONS.PROMOTION_NAME] = "Summer Sale";
-    options[analytics.OPTIONS.PROMOTION_CREATIVE] = "summer_banner2";
-    options[analytics.OPTIONS.PROMOTION_POSITION] = "banner_slot1";
-    options[analytics.OPTIONS.PRODUCT_ACTION] = analytics.OPTIONS.PRODUCT_ACTION_CLICK;
-    
-    analytics.trackPromotion(options);
-```
-*Note:* **PRODUCT_ACTION** and **PRODUCT_ACTION_CLICK** are not typo errors.
-
-### Social
-#### trackSocial(network, action, target, options, success, error);
-Tracks a timing hit:
-
-* {String}     network: (Required) The social network with which the user is interacting (e.g. Facebook, Google+, Twitter, etc.).
-* {String}     action:  (Required) The social action taken (e.g. Like, Share, +1, etc.).
-* {String}     target:  (Required) The content on which the social action is being taken (i.e. a specific article or video).
-* {Object}     options: (Optional) JSON object with additional options ([see options](#options)).
-* {function()} success: (Optional) success callback.
-* {function()} failure: (Optional) failure callback.
-
-Example:
-```javascript
-analytics.trackSocial("Facebook ", "Like", "faceboock.com/AppFeel.Inc");
-```
-
-### Configuration ###
-#### setDispatchPeriod(period, success, error);
-Specifies the dispatch period:
-
-* {Number}     period:   (Required) Dispatch period in seconds.
-* {function()} success:  (Optional) success callback.
-* {function()} failure:  (Optional) failure callback.
-
-#### setAppParams(options, success, error);
-Override default app params:
-
-* {Object}     options:  (Required) JSON object with app params (see below).
-* {function()} success:  (Optional) success callback.
-* {function()} failure:  (Optional) failure callback.
-
-Example (all fields in options object are optional):
-```javascript
-analytics.setAppParams({
-  analytics.OPTIONS.APP_ID: "com.myapp.me",
-  analytics.OPTIONS.APP_INSTALLER_ID: "com.appfeel.app",
-  analytics.OPTIONS.APP_NAME: "my app name",
-  analytics.OPTIONS.APP_VERSION: "1.2.1",
-});
-```
-
-#### setCampaignFromUrl(url, success, error);
-Set campaign url:
-
-* {Object}     url:     (Required) Campaign url. Example: http://www.appfeel.com?utm_campaign=com.analytics.google&utm_source=github&utm_content=setCampaignFromUrl&utm_medium=link ([see here for more info](https://developer.android.com/reference/com/google/android/gms/analytics/HitBuilders.HitBuilder.html#setCampaignParamsFromUrl(java.lang.String))).
-* {function()} success: (Optional) success callback.
-* {function()} failure: (Optional) failure callback.
-
-#### setCustomParams(options, success, error);
-Set any custom parameters you wish (append an & - ampersand - before each key):
-
-* {Object}     options:  (Required) JSON object with custom params params ([see here](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters) for more info).
-* {function()} success:  (Optional) success callback.
-* {function()} failure:  (Optional) failure callback.
-
-Example:
-```javascript
-analytics.setCustomParams({
-  "&cn": "dec2014",
-  "&cs": "http://appfeel.com"
-});
-```
-
-#### setCustomParam(key, value, success, error);
-Set any custom param you wish (append an & - ampersand - before each key):
-
-* {String}     key:     (Required) parameter name ([see here](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters) for more info).
-* {String}     value:   (Required) value for parameter.
-* {function()} success: (Optional) success callback.
-* {function()} failure: (Optional) failure callback.
-
-#### setUserId(id, success, error);
-Specify user id (improves cross-device tracking).
-
-* {String}     id:      (Required) user id.
-* {function()} success: (Optional) success callback.
-* {function()} failure: (Optional) failure callback.
-
-#### setDebugMode(success, error);
-Sets log level to VERBOSE.
-
-* {function()} success: (Optional) success callback.
-* {function()} failure: (Optional) failure callback.
+* {string} `serPropertyName`: (Required) The user property name
+* {string} `userPropertyValue`: (Required) The user property value
