@@ -10,7 +10,7 @@ Ionic Native on the way.
 * A Cordova 3.0+ project for iOS and/or Android
 * A Firebase project
 * Download Google-services.json (android) and GoogleService-info.plist (ios) from Firebase console
-*Note:* [Ionic Demo Project](https://gihub.com/appfeel/ionic-admob-analytics-push-quickstarter) on the way.
+*Note:* [Ionic Demo Project](https://github.com/appfeel/ionic-admob-analytics-push-quickstarter) on the way.
 
 ---
 ## Platform SDK supported
